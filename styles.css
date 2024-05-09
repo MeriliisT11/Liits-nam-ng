@@ -1,0 +1,66 @@
+body {
+    background-color: #f6f0ec;
+    font-family: "Noto Sans", sans-serif;
+  }
+  
+  header {
+    background-color: #acc5ac;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  #points {
+    font-size: 18px;
+  }
+  
+  .game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* Increased height */
+    background-color: #f6f0ec; /* Set background color */
+  }
+  
+  .word-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end; /* Align items to the bottom */
+    margin-top: -20px; /* Adjusted margin to move buttons upwards */
+  }
+  
+  .word {
+    background-color: #acc5ac; /* Set button background color */
+    color: #313131; /* Set button text color */
+    font-family: "Noto Sans", sans-serif; /* Set font family */
+    border: 1px solid #ccc;
+    padding: 20px; /* Fixed padding */
+    margin: 10px; /* Adjusted margin */
+    width: 150px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    font-size: 24px; /* Increased font size */
+    border-radius: 10px; /* Rounded corners */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .word:hover {
+    background-color: #8fa88f; /* Change button background color on hover */
+    transform: scale(1.05);
+  }
+  
+  #message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: green;
+    display: none;
+  }
