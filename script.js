@@ -20,22 +20,56 @@ document.addEventListener("drop", function(event) {
     event.target.appendChild(dragged);
     checkWords();
   }
+  if (event.target.id === "word2" && dragged.id === "word1") {
+    event.target.appendChild(dragged);
+    const käsiWord = document.getElementById("word1");
+    const kellWord = document.getElementById("word2");
+    const käekellButton = document.createElement("div");
+    käekellButton.className = "word";
+    käekellButton.innerText = "KÄEKELL";
+    käekellButton.draggable = true;
+    käekellButton.ondragstart = drag;
+    kellWord.innerHTML = "";
+    käsiWord.innerHTML = "";
+    event.target.appendChild(käekellButton);
+    checkWords();
+  }
 });
 
 function checkWords() {
   const words = document.querySelectorAll('.word');
-  const word1 = words[0].innerText.toLowerCase();
-  const word2 = words[1].innerText.toLowerCase();
+  let combinedWord = '';
+  words.forEach(word => {
+    combinedWord += word.innerText.toLowerCase();
+  });
 
-  if ((word1.includes('käsi') && word2.includes('kell')) || (word1.includes('kell') && word2.includes('käsi'))) {
-    document.getElementById('message').innerText = 'Õige! Edasi järgmisele tasemele!';
-    points++;
-    document.getElementById('points-counter').innerText = points;
-    setTimeout(() => {
-      document.getElementById('message').innerText = '';
-      // Add logic to proceed to the next level here
-    }, 2000);
+  if (combinedWord === 'käekell') {
+    nextLevel();
   } else {
     document.getElementById('message').innerText = 'Vale! Proovi uuesti.';
   }
+}
+
+function resetGame() {
+  points = 0;
+  document.getElementById('points-counter').innerText = points;
+  document.getElementById('message').innerText = '';
+  const wordContainers = document.querySelectorAll('.word-container .word');
+  wordContainers.forEach(word => {
+    word.innerHTML = '';
+  });
+}
+
+function nextLevel() {
+  document.getElementById('message').innerText = 'Õige! Edasi järgmisele tasemele!';
+  points++;
+  document.getElementById('points-counter').innerText = points;
+  setTimeout(() => {
+    resetGame();
+  }, 2000);
+}
+
+function drag(event) {
+  dragged = event.target;
+  event.target.style.opacity = .5;
 }
