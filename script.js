@@ -24,14 +24,20 @@ document.addEventListener("drop", function(event) {
     event.target.appendChild(dragged);
     const käsiWord = document.getElementById("word1");
     const kellWord = document.getElementById("word2");
+    const käsiText = käsiWord.innerText;
+    const kellText = kellWord.innerText;
+    const combinedText = käsiText + kellText;
     const käekellButton = document.createElement("div");
     käekellButton.className = "word";
-    käekellButton.innerText = "KÄEKELL";
+    käekellButton.innerText = combinedText;
     käekellButton.draggable = true;
     käekellButton.ondragstart = drag;
-    kellWord.innerHTML = "";
-    käsiWord.innerHTML = "";
     event.target.appendChild(käekellButton);
+    käsiWord.style.display = "none";
+    kellWord.style.display = "none";
+    points++;
+    document.getElementById('points-counter').innerText = points;
+    generateNewWords();
     checkWords();
   }
 });
@@ -50,6 +56,19 @@ function checkWords() {
   }
 }
 
+function generateNewWords() {
+  const wordContainer = document.querySelector('.word-container');
+  const newWords = ['pann', 'pliit', 'kook', 'pott'];
+  newWords.forEach(word => {
+    const newWordButton = document.createElement("div");
+    newWordButton.className = "word";
+    newWordButton.innerText = word.toUpperCase();
+    newWordButton.draggable = true;
+    newWordButton.ondragstart = drag;
+    wordContainer.appendChild(newWordButton);
+  });
+}
+
 function resetGame() {
   points = 0;
   document.getElementById('points-counter').innerText = points;
@@ -57,13 +76,12 @@ function resetGame() {
   const wordContainers = document.querySelectorAll('.word-container .word');
   wordContainers.forEach(word => {
     word.innerHTML = '';
+    word.style.display = "block";
   });
 }
 
 function nextLevel() {
   document.getElementById('message').innerText = 'Õige! Edasi järgmisele tasemele!';
-  points++;
-  document.getElementById('points-counter').innerText = points;
   setTimeout(() => {
     resetGame();
   }, 2000);
